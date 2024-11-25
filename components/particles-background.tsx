@@ -1,13 +1,18 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Particles from "react-tsparticles"
 import { loadFull } from "tsparticles"
 import type { Engine } from "tsparticles-engine"
 import { useTheme } from "next-themes"
 
 export const ParticlesBackground = () => {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
+  const [key, setKey] = useState(0)
+
+  useEffect(() => {
+    setKey(prev => prev + 1)
+  }, [resolvedTheme])
   
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine)
@@ -15,6 +20,7 @@ export const ParticlesBackground = () => {
 
   return (
     <Particles
+      key={key}
       id="tsparticles"
       init={particlesInit}
       options={{
@@ -30,10 +36,10 @@ export const ParticlesBackground = () => {
         fpsLimit: 120,
         particles: {
           color: {
-            value: theme === 'dark' ? "#ffffff" : "#000000",
+            value: resolvedTheme === 'dark' ? "#ffffff" : "#000000",
           },
           links: {
-            color: theme === 'dark' ? "#ffffff" : "#000000",
+            color: resolvedTheme === 'dark' ? "#ffffff" : "#000000",
             distance: 150,
             enable: true,
             opacity: 0.7,

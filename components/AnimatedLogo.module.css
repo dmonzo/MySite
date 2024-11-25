@@ -23,16 +23,6 @@
   z-index: -1;
 }
 
-.glowingText::before {
-  filter: blur(0.02em);
-  opacity: 0.8;
-}
-
-.glowingText::after {
-  filter: blur(0.04em);
-  opacity: 0.5;
-}
-
 :global(.light) .glowingText {
   --logo-text-color: hsl(240, 10%, 3.9%);
   --logo-glow-color: hsla(240, 10%, 3.9%, 0.7);
