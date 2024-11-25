@@ -1,8 +1,16 @@
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// @ts-ignore
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export interface TextareaProps {
+  className?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  rows?: number;
+  [key: string]: any; // This allows for spreading of additional props
+}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
