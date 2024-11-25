@@ -1,22 +1,37 @@
+'use client'
+
 import Link from 'next/link'
 import { ContactForm } from "@/components/contact-form"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { AnimatedLogo } from "@/components/animated-logo"
+import { usePathname } from 'next/navigation'
 
 export default function Contact() {
+  const pathname = usePathname()
+
   return (
     <div className="relative flex flex-col min-h-screen">
       <div className="relative z-10 flex flex-col min-h-screen bg-background">
         <header className="sticky top-0 z-20 p-5 bg-background/80 backdrop-blur-sm border-b">
           <nav className="container mx-auto flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Dashiel Monzo</h1>
+            <AnimatedLogo />
             <div className="space-x-6 flex items-center">
-              <Link href="/" className="hover:text-primary transition-colors">
+              <Link 
+                href="/" 
+                className={`hover:text-primary transition-colors ${pathname === '/' ? 'text-primary' : ''}`}
+              >
                 Home
               </Link>
-              <Link href="/about" className="hover:text-primary transition-colors">
+              <Link 
+                href="/about" 
+                className={`hover:text-primary transition-colors ${pathname === '/about' ? 'text-primary' : ''}`}
+              >
                 About
               </Link>
-              <Link href="/contact" className="hover:text-primary transition-colors">
+              <Link 
+                href="/contact" 
+                className={`hover:text-primary transition-colors ${pathname === '/contact' ? 'text-primary' : ''}`}
+              >
                 Contact
               </Link>
               <ThemeToggle />
