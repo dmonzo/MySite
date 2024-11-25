@@ -7,11 +7,44 @@ import { AnimatedLogo } from "@/components/animated-logo"
 import { ParticlesBackground } from "@/components/particles-background"
 import { motion } from 'framer-motion'
 import { useTheme } from "next-themes"
+import { useEffect, useState } from 'react'
 
 const AnimatedLink = motion(Link)
 
 const HomePage = () => {
   const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Prevent hydration mismatch by rendering a simple loading state
+  if (!mounted) {
+    return (
+      <div className="relative flex flex-col min-h-screen">
+        <div className="relative z-10 flex flex-col min-h-screen bg-background">
+          <header className="sticky top-0 z-20 p-5 bg-background/70 backdrop-blur-sm">
+            <nav className="container mx-auto flex justify-between items-center">
+              <div className="h-8 w-8" /> {/* Logo placeholder */}
+              <div className="space-x-6 flex items-center">
+                <span className="opacity-0">Home</span>
+                <span className="opacity-0">About</span>
+                <span className="opacity-0">Contact</span>
+                <span className="opacity-0">Theme</span>
+              </div>
+            </nav>
+          </header>
+          <main className="flex-grow" />
+          <footer className="bg-background/70 backdrop-blur-sm p-4">
+            <div className="container mx-auto text-center text-sm text-muted-foreground opacity-0">
+              © {new Date().getFullYear()} Dashiel Monzo
+            </div>
+          </footer>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative flex flex-col min-h-screen">
