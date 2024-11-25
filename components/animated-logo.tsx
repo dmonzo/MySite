@@ -1,18 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styles from './AnimatedLogo.module.css'
 
 export function AnimatedLogo() {
   const [isHovered, setIsHovered] = useState(false)
   const [isClickExpanded, setIsClickExpanded] = useState(false)
+  const [displayText, setDisplayText] = useState('DM')
 
   const handleClick = () => {
     setIsClickExpanded(!isClickExpanded)
   }
 
   const isExpanded = isClickExpanded || isHovered
+
+  useEffect(() => {
+    setDisplayText(isExpanded ? 'Dashiel Monzo' : 'DM')
+  }, [isExpanded])
 
   return (
     <div 
@@ -30,8 +35,11 @@ export function AnimatedLogo() {
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <span className={`text-xl font-medium whitespace-nowrap ${styles.glowingText}`}>
-          {isExpanded ? 'Dashiel Monzo' : 'DM'}
+        <span 
+          className={`text-xl font-medium whitespace-nowrap ${styles.glowingText}`}
+          data-text={displayText}
+        >
+          {displayText}
         </span>
       </motion.div>
     </div>

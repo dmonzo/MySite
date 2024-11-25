@@ -1,33 +1,45 @@
-@keyframes glow {
-    0%, 100% {
-      text-shadow: 
-        0 0 7px rgba(255,255,255,0.8),
-        0 0 10px rgba(255,255,255,0.8),
-        0 0 21px rgba(255,255,255,0.7),
-        0 0 42px rgba(255,255,255,0.6),
-        0 0 82px rgba(255,255,255,0.5),
-        0 0 92px rgba(255,255,255,0.4),
-        0 0 102px rgba(255,255,255,0.3),
-        0 0 151px rgba(255,255,255,0.2);
-    }
-    50% {
-      text-shadow: 
-        0 0 4px rgba(255,255,255,0.3),
-        0 0 6px rgba(255,255,255,0.3),
-        0 0 11px rgba(255,255,255,0.3),
-        0 0 22px rgba(255,255,255,0.3),
-        0 0 42px rgba(255,255,255,0.3),
-        0 0 52px rgba(255,255,255,0.3),
-        0 0 62px rgba(255,255,255,0.3),
-        0 0 91px rgba(255,255,255,0.3);
-    }
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px var(--logo-glow-color)) brightness(1);
   }
-  
-  .glowingText {
-    animation: glow 2s ease-in-out infinite;
-    color: #fff;
-    padding: 0.1em 0.2em;
-    border-radius: 0.2em;
+  50% {
+    filter: drop-shadow(0 0 10px var(--logo-glow-color)) brightness(1.2);
   }
-  
-  
+}
+
+.glowingText {
+  position: relative;
+  color: var(--logo-text-color);
+  animation: glowPulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.glowingText::before,
+.glowingText::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.glowingText::before {
+  filter: blur(0.02em);
+  opacity: 0.8;
+}
+
+.glowingText::after {
+  filter: blur(0.04em);
+  opacity: 0.5;
+}
+
+:global(.light) .glowingText {
+  --logo-text-color: hsl(240, 10%, 3.9%);
+  --logo-glow-color: hsla(240, 10%, 3.9%, 0.7);
+}
+
+:global(.dark) .glowingText {
+  --logo-text-color: hsl(0, 0%, 95%);
+  --logo-glow-color: hsla(0, 0%, 95%, 0.7);
+}
+
