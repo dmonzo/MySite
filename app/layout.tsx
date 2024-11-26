@@ -6,8 +6,8 @@ import { ParticlesBackground } from "@/components/particles-background"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Dashiel Monzo - Network & VoIP Engineer Portfolio",
-  description: "Personal portfolio showcasing Dashiel Monzo's projects and skills in Network Engineering and VoIP Systems",
+  title: "Dashiel Monzo - My Portfolio",
+  description: "Personal portfolio showcasing Dashiel Monzo.",
 }
 
 export default function RootLayout({
