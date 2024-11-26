@@ -23,7 +23,7 @@
     "react-tsparticles": "^2.12.0",
     "tsparticles":"^2.12.0",
     "tsparticles-engine": "^2.12.0",
-    "tsparticles-slime": "^2.12.0"
+    "tsparticles-slim": "^2.12.0"
   },
   "devDependencies": {
     "@types/node": "20.6.2",
